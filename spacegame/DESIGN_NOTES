@@ -1,0 +1,75 @@
+Day
+  - 3 turns
+
+Event "Deck"
+  - 1 event per turn after player locks in turn decision
+  - Changes outcome of turn slightly (positive of negative)
+
+Crew
+  - Assign Crew to Duties
+    - Mine
+    - Food Production
+    - Solar Energy Farm Operation
+  - Can be injured (unusable for x turns)
+  - Can be locked into duty for x turns (Research)
+
+Resource Station(s)
+  => All un-upgrade stations follow rule: +1 max / person, +1 min / 2 people
+  => Default max crew per station is 5
+  - Food Farm
+  - Solar Farm
+  - Asteroid Mine
+    - Negative events can injured Crew Members for turn(s)
+
+Special Station(s)
+  - Research Lab
+
+Upgrades
+  - Cost Ore, Energy, and Man Power (lock down crew members for x turns / x days)
+
+
+Resources
+  - Amounts generated are a range for the turn (ie. 1-3, 3-5)
+  - Negative event can reduce min, max, or a flat reduction of production.
+  - Flat reduction of banked resources can also occur. (Food spoil, power wasted, ore lost)
+  - Position event can change resource output (make the min the same as the max, increase max, flat addition)
+
+Rations
+  - Come from Hydroponic farm by manning it
+  - Need 1 food per crew per day (3 turns)
+
+Energy
+  - Comes from Solar Farm passively, increase by manning it
+
+Ore
+  - Comes from mining only when manned
+  - Victory Points
+  - Also used to repair damaged systems
+
+
+
+
+
+Gameplay Cycle
+
+Should upgrades be per game and done in game
+or
+Should upgrade cost money outside of the mining game?
+
+Crew / Resource purchase (Game Setup)
+Game starts
+  => Daily event popped and resolved (Start of cycle)
+    => Turn locked in by player
+    => Turn Event Popped and Resolved
+    => Resolve Resource Output
+    => Resolve Turn Based Costs (Energy)
+  => After x Turns, new day starts
+  => Pay Daily Costs (Rations / Human Life if no rations)
+  => Begin Daily Cycle Again (End of cycle)
+Game Ends (Either by reaching Day Goal, or all crew is dead)
+Cash Out Resources
+  => $50 for Rations
+  => $100 for Energy
+  => $1000 for Ore
+  => Add more minerals
+Start New Game with loads-a-money
