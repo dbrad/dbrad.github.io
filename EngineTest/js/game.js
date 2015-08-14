@@ -29,18 +29,41 @@ var Profiler = (function (_super) {
     };
     return Profiler;
 })(Subject);
+var Context2D = (function (_super) {
+    __extends(Context2D, _super);
+    function Context2D() {
+        _super.apply(this, arguments);
+    }
+    return Context2D;
+})(CanvasRenderingContext2D);
+var Layer = (function () {
+    function Layer(screen) {
+        this.screen = screen;
+        this.ctx = this.screen.getContext('2d');
+        this.ctx.mozImageSmoothingEnabled = false;
+        this.ctx.imageSmoothingEnabled = false;
+    }
+    return Layer;
+})();
 var Game = (function () {
-    function Game(screen) {
-        this.camera = new Point(12 * 16, 6 * 16);
+    function Game() {
+        var screens = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            screens[_i - 0] = arguments[_i];
+        }
+        this.Layers = [];
+        this.camera = new Point(1 * 16, 1 * 16);
         this.change = true;
         this.clearScreen = true;
         this.then = performance.now();
         this.lag = 0.0;
+        this.skippedFrames = 0;
         console.log("Setting up screen and Profiler...");
-        this.screen = screen;
-        this.ctx = this.screen.getContext("2d");
-        this.ctx.mozImageSmoothingEnabled = false;
-        this.ctx.imageSmoothingEnabled = false;
+        for (var _a = 0; _a < screens.length; _a++) {
+            var screen = screens[_a];
+            this.Layers.push(new Layer(screen));
+        }
+        this.screen = this.Layers[0];
         this.profiler = new Profiler();
         var FPSHeader = document.getElementById("UPS");
         this.profiler.addObserver(function (FPS) {
@@ -58,7 +81,7 @@ var Game = (function () {
         this.Player.addGear(new Sprite(SpriteSheetCache.spriteSheet("lower").sprites[10]));
         this.Player.addGear(new Sprite(SpriteSheetCache.spriteSheet("lower").sprites[11]));
         this.Player.addGear(new Sprite(SpriteSheetCache.spriteSheet("upper").sprites[3]));
-        this.World = new TileMap(new Dimension(25, 12));
+        this.World = new TileMap(new Dimension(48, 23));
         this.BackdropL1 = new TileMap(new Dimension(50, 25));
         this.BackdropL2 = new TileMap(new Dimension(50, 25));
         var tileSet = new TileSet(SpriteSheetCache.spriteSheet("terrain"));
@@ -75,16 +98,16 @@ var Game = (function () {
     };
     Game.prototype.draw = function () {
         if (this.clearScreen) {
-            this.BackdropL1.draw(this.ctx);
-            this.BackdropL2.draw(this.ctx);
+            this.BackdropL1.draw(this.Layers[0].ctx);
+            this.BackdropL2.draw(this.Layers[0].ctx);
             this.clearScreen = false;
         }
         if (this.change) {
-            this.ctx.save();
-            this.ctx.translate(this.camera.x, this.camera.y);
-            this.World.draw(this.ctx);
-            this.Player.draw(this.ctx);
-            this.ctx.restore();
+            this.Layers[0].ctx.save();
+            this.Layers[0].ctx.translate(this.camera.x, this.camera.y);
+            this.World.draw(this.Layers[0].ctx);
+            this.Player.draw(this.Layers[0].ctx);
+            this.Layers[0].ctx.restore();
             this.change = false;
         }
     };
@@ -93,32 +116,35 @@ var Game = (function () {
         var delta = (now - this.then);
         this.then = now;
         this.lag += delta;
-        while (this.lag >= Game.DELTA_CONST) {
+        this.skippedFrames = 0;
+        while (this.lag >= Game.DELTA_CONST && this.skippedFrames < 10) {
             this.update(delta);
             this.lag -= Game.DELTA_CONST;
+            this.skippedFrames++;
         }
         if (this.clearScreen) {
-            this.ctx.clearRect(0, 0, this.screen.width, this.screen.height);
+            this.Layers[0].ctx.clearRect(0, 0, this.Layers[0].screen.width, this.Layers[0].screen.height);
         }
         this.draw();
         this.profiler.profile(delta);
+        window.requestAnimationFrame(this.render.bind(this));
     };
     Game.prototype.run = function () {
         console.log("Game running");
-        this._loopHandle = setInterval(this.render.bind(this), Game.DELTA_CONST);
+        window.requestAnimationFrame(this.render.bind(this));
     };
     Game.prototype.stop = function () {
         console.log("Game stopped");
         clearInterval(this._loopHandle);
     };
     Game.frameRate = 60.0;
-    Game.DELTA_CONST = Math2.round(1000.0 / Game.frameRate, 8);
+    Game.DELTA_CONST = Math2.round(1000.0 / Game.frameRate, 3);
     return Game;
 })();
 window.onload = function () {
     window.onkeydown = Input.Keyboard.keyDown;
     window.onkeyup = Input.Keyboard.keyUp;
-    var c = document.getElementById("gameCanvas");
+    var c = document.getElementById("layer_1");
     var game = new Game(c);
     ImageCache.Loader.add("sheet", "assets/roguelikeChar_transparent.png");
     ImageCache.Loader.add("terrain", "assets/roguelikeSheet_transparent.png");

@@ -161,12 +161,7 @@ var Sprite = (function (_super) {
         this.position.y = position.y;
     };
     Sprite.prototype.draw = function (ctx) {
-        ctx.save();
-        ctx.translate(this.position.x + this.size.width * this.scale.width / 2, this.position.y + this.size.height * this.scale.height / 2);
-        ctx.rotate(this.rotation * Math.PI / 180);
-        ctx.scale(this.scale.width, this.scale.height);
-        ctx.drawImage(this.texture.image, 0, 0, this.size.width, this.size.height, -this.size.width / 2, -this.size.height / 2, this.size.width, this.size.height);
-        ctx.restore();
+        ctx.drawImage(this.texture.image, 0, 0, this.size.width, this.size.height, this.position.x, this.position.y, this.size.width, this.size.height);
         ctx.mozImageSmoothingEnabled = false;
         ctx.imageSmoothingEnabled = false;
     };
