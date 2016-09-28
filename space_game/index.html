@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript">
+
+    </script>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js" charset="utf-8"></script>
+    <script src="./js/lib/pixi.js" charset="utf-8"></script>
+    <script src="./js/lib/underscore.js" charset="utf-8"></script>
+    <script src="./js/lib/utilityFunctions.js" charset="utf-8"></script>
+
+    <script src="./js/Player/Player.js" charset="utf-8"></script>
+    <script src="./js/Player/DaySystem.js" charset="utf-8"></script>
+    <script src="./js/Player/Crew.js" charset="utf-8"></script>
+    <script src="./js/Player/ResourceStation.js" charset="utf-8"></script>
+
+    <script src="./js/State/StateMachine.js" charset="utf-8"></script>
+    <script src="./js/State/BaseState.js" charset="utf-8"></script>
+    <script src="./js/State/GameState.js" charset="utf-8"></script>
+    <script src="./js/State/GameOverState.js" charset="utf-8"></script>
+
+    <script src="./js/System/Input.js" charset="utf-8"></script>
+    <script src="./js/System/Animation.js" charset="utf-8"></script>
+    <script src="./js/System/Profiler.js" charset="utf-8"></script>
+    <script src="./js/System/Game.js" charset="utf-8"></script>
+    <script src="./js/System/GUI.js" charset="utf-8"></script>
+
+    </script>
+    <script type="text/javascript">
+      PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.LINEAR;
+
+      $(function(){
+
+        function onLoaded() {
+          // 16 : 9 / 8 : 4.5 / 12 : 6.75
+          var game = new Game(1200, 675);
+          game.start();
+        }
+
+        WebFontConfig = {
+          google: { families: [ 'VT323::latin', 'Roboto+Mono::latin', 'Share+Tech+Mono::latin' ] },
+          active: onLoaded
+        };
+        (function() {
+          var wf = document.createElement('script');
+          wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+            '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+          wf.type = 'text/javascript';
+          wf.async = 'true';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(wf, s);
+        })();
+
+        // NOTE(david): Will load any assets here.
+/*
+        var loader = PIXI.loader;
+        loader.add('plus','assets/plus.png');
+        loader.add('minus','assets/minus.png');
+        loader.once("complete", onLoaded);
+        loader.load();
+*/
+        //onLoaded();
+
+      });
+    </script>
+    <link rel="stylesheet" href="./css/normalize.css">
+    <style media="screen">
+      html, body {
+        text-align: center;
+        font-family: 'VT323';
+        text-transform: uppercase;
+      }
+      body {
+        cursor: url("./assets/cursor_pointerFlat_shadow.png"), default;
+      }
+      canvas {
+        background-image: url("assets/bg.jpg");
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <div id="Profiler">
+
+    </div>
+    <div id="StateName">
+
+    </div>
+  </body>
+</html>

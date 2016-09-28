@@ -65,6 +65,35 @@
 			text-decoration: none;
 			color: #000;
 		}
+		.entry {
+			text-align: center;
+			font-size: 0px;
+			margin-bottom: 20px;
+			border: 2px solid #3f594b;
+			padding: 10px;
+			vertical-align: top;
+		}
+		.exp_img, .exp_desc {
+			display: inline-block;
+			font-size: 16px;
+		}
+		.exp_img {
+			text-align: center;
+			width: 160px;
+			height: 160px;
+			vertical-align: top;
+			margin-right: 10px;
+			border: 1px solid #5b7a69;
+		}
+		.exp_img img {
+			margin: 16px auto;
+			width: 128px;
+			height: 128px;
+		}
+		.exp_desc {
+			width: 570px;
+			text-align: left;
+		}
 	</style>
 </head>
 <body>
@@ -76,15 +105,70 @@
 				<a class="nav-button" href="https://twitter.com/david_brad" target="_blank"><span>Twitter</span></a>
 				<a class="nav-button" href="mailto:davidbrad.015@gmail.com" target="_blank"><span>Contact Me</span></a>
 			</span>
-			<span id="image"><img src="./david.png"></span>
+			<span id="image"><img src="./images/david.png"></span>
 		</div>
 		<div id="body">	
-			<h1> David Brad</h1>
+			<h1>David Brad</h1>
 			<h3>Senior Data-Integration Specialist</h3><br>
 			I lift in the morning, game in the evening, and code in the afternoon.<br>
 			I'm a programmer by trade and I have a love for Web Development, especially when it comes to Javascript.<br>
 			I enjoy cooking, powerlifting, and both digital and tabletop gaming in my freetime.<br>
 			Feel free to reach out to me via Twitter, LinkedIn, or Email.
+		</div>
+		<div id="experiments">
+			<h1>Experiments / Prototypes</h1>
+			<div class="entry">
+				<span class="exp_img"><a href="space_game/index.html" target="_blank"><img src="./images/space_game.png" alt="Space Resource Management Game"></a></span>
+				<span class="exp_desc">
+					<h3>Space Resource Management Prototype</h3>
+					<div>My first stab at prototyping a game idea out in Javascript and in general, since I was in school.  A resource management style of game seemed like a good place to start learning as it boils down to "Numbers in Action".  The long term intent was to add random events to shake up resource storage and generation and have the player cope with those challenges.</div>
+					<div>This project was written using Javascript.</div>
+				</span>
+			</div>
+			<div class="entry">
+				<span class="exp_img"><a href="EngineTest/index.html" target="_blank"><img src="./images/enginetest.png" alt="Prototype Engine"></a></span>
+				<span class="exp_desc">
+					<h3>Basic 2D JS Game Engine Prototype</h3>
+					<div>An early attempt at using Typescript for game development / prototyping.  I believe this was my first major foray into Typescript, and after this project I began to understand the benefits of using it.</div>
+					<div>This project was written using Typescript.</div>
+				</span>
+			</div>
+			<div class="entry">
+				<span class="exp_img"><a href="js13k2015/index.html" target="_blank"><img src="./images/js13k2015.png" alt="js 13k entry"></a></span>
+				<span class="exp_desc">
+					<h3>js13k 2015 Game</h3>
+					<div>An abandoned entry to the 2015 js13k game jam.  
+					<br>The goals of the game jam each year are: 
+					<ul>
+						<li>to make a game for a given theme</li>
+						<li>before the given deadline</li>
+						<li>submitted in HTML / javascript format that can be simply opened in a browser</li>
+						<li>all files for the game compresses into a standard zip file under 13kb in size</li>  
+					</ul>
+					I got off to a good start with this, but had to give up on it due to time contraints. 
+					<br>I used a gulp workflow to auto the minification and zipping of the files as I worked.</div>
+					<div>This project was written using Typescript.</div>
+				</span>
+			</div>
+			<div class="entry">
+				<span class="exp_img"><a href="roguelite/index.html" target="_blank"><img src="./images/roguelite.png" alt="Rogue Lite Game Prototype"></a></span>
+				<span class="exp_desc">
+					<h3>2D Graphical Rogue-lite Game Prototype</h3>
+					<div>
+						This project represents a major collection of learning experiences for me.  To date I have implemented a number of concepts and features such as:
+						<ul>
+							<li>tile maps</li>
+							<li>a caved generation algorithm (still in source code, not currently used)</li>
+							<li>a dungeon generation algorithm</li>
+							<li>A* for enemy pathfinding</li>
+							<li>limited ray tracing, used for player line of sight and vision in pseduo "fog of war"</li>
+							<li>a few other minor features such a minimap and global text log</li> 
+						</ul>
+						I hope to return to this project, or recreate it with lessons learned, when creativity strikes me again.
+					</div>
+					<div>This project was written using Typescript.</div>
+				</span>
+			</div>
 		</div>
 	</div>
 </body>
